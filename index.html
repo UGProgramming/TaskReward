@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airtime Plus Data Rewards</title>
+    <style>
+
+
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #000;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header, footer {
+    background-color: #000;
+    text-align: center;
+    padding: 20px;
+    border-top: 2px solid gold;
+    border-bottom: 2px solid gold;
+}
+
+header h1 {
+    color: white;
+    font-size: 2.5em;
+    text-shadow: 2px 2px 8px #ffd700;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    justify-content: space-around;
+    padding: 0;
+    color: white;
+  
+}
+
+nav ul li {
+    margin: 0px 0px;
+}
+
+nav ul li a {
+    color: gold;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: white;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.highlight-box-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+   margin: 50px 50px;
+}
+
+.highlight-box {
+   
+    background: linear-gradient(135deg, #ffd700, #ffcc00);
+    color: #000;
+    display: inline-block;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 2px rgba(255, 215, 0, 0.7);
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+  
+   
+}
+
+.tasks, .claim {
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid gold;
+    border-radius: 10px;
+    max-width: 800px;
+    background-color: #111;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+.instructions {
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid gold;
+    border-radius: 10px;
+    max-width: 800px;
+    background-color: #111;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+.instructions ol {
+    margin: 0;
+    padding-left: 20px;
+    list-style: none;
+}
+
+.instructions ol li::before {
+    content: "✔ ";
+    color: gold;
+    margin-right: 5px;
+}
+
+.instructions h2 {
+    color: gold;
+    text-shadow: 1px 1px 5px #ffd700;
+    margin-bottom: 10px;
+}
+
+.warning {
+    color: red;
+    font-weight: bold;
+}
+
+.tasks ul {
+    list-style: none;
+    padding: 0;
+}
+
+.tasks li {
+    margin-bottom: 20px;
+}
+
+.tasks li.disabled h3, .tasks li.disabled p {
+    color: gray;
+}
+
+.task-button {
+    display: block;
+    margin-top: 10px;
+    padding: 10px;
+    background-color: gold;
+    color: #000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.task-button:disabled {
+    background-color: gray;
+    cursor: not-allowed;
+}
+
+
+
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: gold;
+}
+
+form input, form select, form button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid gold;
+    border-radius: 5px;
+    background-color: #222;
+    color: #fff;
+    font-size: 1em;
+}
+
+form button {
+    background-color: gold;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+form button:hover {
+    background-color: #ffd700;
+}
+
+#claim-summary img {
+    width: 100%;
+    max-width: 200px;
+    display: block;
+    margin: 10px auto;
+}
+
+#send-approval-btn {
+    display: none;
+    background-color: gold;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+#send-approval-btn:hover {
+    background-color: #ffd700;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2em;
+    }
+
+   
+
+    nav ul li {
+        margin-top: 35px 0;
+    }
+
+    main, .tasks, .claim, .instructions {
+        margin: 10px;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.5em;
+    }
+
+    nav ul li {
+        margin-top: 35px 0;
+    }
+
+    main, .tasks, .claim, .instructions {
+        margin: 5px;
+        padding: 5px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </style>   
+</head>
+<body>
+    <header>
+        <h1>Welcome to the Reward Platform</h1>
+        <nav>
+            <ul>
+                <li><a href="#home" onclick="loadPage('home')">Home</a></li>
+                <li><a href="#tasks" onclick="loadPage('tasks')">Tasks</a></li>
+                <li><a href="#claim" onclick="loadPage('claim')">Claim</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main id="main-content">
+        <!-- Content will be loaded here -->
+    </main>
+    <footer>
+        <!-- Decorative footer -->
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadPage('home');
+        });
+
+        function loadPage(page) {
+            const mainContent = document.getElementById('main-content');
+            switch (page) {
+                case 'home':
+                    mainContent.innerHTML = `
+                        <section class="intro">
+                            <div class="highlight-box-container"> 
+                            <div class="highlight-box">
+                                <p>Airtime + Data</p>
+                            </div>
+                            </div>
+                            <p>Complete tasks and earn free airtime or data!</p>
+                        </section>
+                        <section class="instructions">
+                            <h2>How to Successfully Claim Your Rewards</h2>
+                            <ol>
+                                <li>Go to the Task page.</li>
+                                <li>Complete a task.</li>
+                                <li>Screenshot the completed task.</li>
+                                <li>Go to the Claim page.</li>
+                                <li>Attach the screenshot for approval.</li>
+                                <li>claimed rewards is sent after 12:00am.</li>
+                            </ol>
+                            <p class="warning"><strong>Warning:</strong> You will be disqualified if a screenshot of the task is not provided or any suspicious activity is detected.</p>
+                        </section>
+                    `;
+                    break;
+                case 'tasks':
+                    mainContent.innerHTML = `
+                        <section class="tasks">
+                            <h2>Available Tasks</h2>
+                            <ul>
+                                <li>
+                                    <h3>Opay</h3>
+                                    <p>You would only be eligible for this task if you are a new user to Opay.</p>
+                                    <button id="opay-task1" class="task-button" onclick="completeTask('opay-task1')">Open Opay Account (Reward: 100MB, 50NGN)</button>
+                                    <p class="coming-soon">More tasks coming soon</p>
+                                </li>
+                                <li>
+                                    <h3>Palmpay</h3>
+                                    <p>You would only be eligible for this task if you are a new user to Palmpay. You can open up to 2 Palmpay accounts with the same ID and face recognition but with different phone numbers.</p>
+                                    <button id="palmpay-task1" class="task-button" onclick="completeTask('palmpay-task1')">Open Palmpay Account (Reward: 200MB, 100NGN)</button>
+                                    <p class="coming-soon">More tasks coming soon</p>
+                                </li>
+                                <li class="disabled">
+                                    <h3>Youtube</h3>
+                                    <p>Coming Soon</p>
+                                </li>
+                                <li class="disabled">
+                                    <h3>Twitter</h3>
+                                    <p>Coming Soon</p>
+                                </li>
+                                <li class="disabled">
+                                    <h3>TikTok</h3>
+                                    <p>Coming Soon</p>
+                                </li>
+                            </ul>
+                        </section>
+                    `;
+                    break;
+                case 'claim':
+                    mainContent.innerHTML = `
+                        <section class="claim">
+                            <h2>Claim Your Reward</h2>
+                            <form id="claim-form">
+                                <label for="screenshot">Attach Screenshot:</label>
+                                <input type="file" id="screenshot" accept="image/*" required>
+                                
+                                <label for="phone">Phone Number:</label>
+                                <input type="text" id="phone" value="+234" maxlength="14" required>
+                                
+                                <label for="network">Choose Network:</label>
+                                <select id="network" required>
+                                    <option value="MTN">MTN</option>
+                                    <option value="AIRTEL">AIRTEL</option>
+                                    <option value="GLO">GLO</option>
+                                    <option value="9Mobile">9Mobile</option>
+                                </select>
+                                
+                                <button type="button" onclick="generateClaim()">Claim</button>
+                            </form>
+                            <div id="claim-summary">
+                                <!-- Summary will be displayed here -->
+                            </div>
+                            <button id="send-approval-btn" style="display:none;" onclick="sendForApproval()">Send for Approval</button>
+                        </section>
+                    `;
+                    break;
+            }
+        }
+
+        function completeTask(taskId) {
+            const taskButton = document.getElementById(taskId);
+            taskButton.disabled = true;
+            taskButton.innerText = 'Completed';
+        }
+
+        function generateClaim() {
+            const screenshot = document.getElementById('screenshot').files[0];
+            const phone = document.getElementById('phone').value;
+            const network = document.getElementById('network').value;
+
+            if (screenshot && phone && network) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imageUrl = e.target.result;
+                    const summary = document.getElementById('claim-summary');
+                    summary.innerHTML = `
+                        <h3>Claim Summary</h3>
+                        <p><strong>Attached Image:</strong></p>
+                        <img src="${imageUrl}" alt="Screenshot" style="width: 100%; max-width: 200px;">
+                        <p><strong>Chosen Network:</strong> ${network}</p>
+                        <p><strong>Phone Number:</strong> ${phone}</p>
+                    `;
+                    document.getElementById('send-approval-btn').style.display = 'block';
+                };
+                reader.readAsDataURL(screenshot);
+            } else {
+                alert('Please fill in all fields.');
+            }
+        }
+
+        function sendForApproval() {
+            const telegramLink = 'https://t.me/+l1yGCquVxZ1mODjk';  // Replace with your Telegram channel link
+            window.open(telegramLink, '_blank');
+            alert('Claim sent for approval.');
+        }
+    </script>
+</body>
+</html>
